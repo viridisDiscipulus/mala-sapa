@@ -1,0 +1,60 @@
+services:
+  angular-app:
+    image: webshop-angular-app:latest  # Use the pre-loaded image
+    ports:
+      - "8081:80"  # Expose Angular app on port 8081
+    networks:
+      - app-network
+    environment:
+      - API_URL=http://10.0.2.15:5000  # Update this if needed to refer to the backend API
+
+  dotnet-api:
+    image: webshop-dotnet-api:latest  # Use the pre-loaded image
+    environment:
+      - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=WebShop;User Id=sa;Password=ComplexP@ssw0rd!;TrustServerCertificate=True;
+      - ConnectionStrings__Redis=redis:6379  # Redis connection string using the service name
+    depends_on:
+      - sqlserver
+      - redis
+    ports:
+      - "5000:80"  # Expose .NET API on port 5000 on the host machine
+    networks:
+      - app-network
+
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest  # Use the SQL Server image
+    container_name: sqlserver
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=ComplexP@ssw0rd!
+    ports:
+      - "1433:1433"  # Expose SQL Server on port 1433
+    networks:
+      - app-network
+    healthcheck:
+      test: ["CMD", "/opt/mssql-tools/bin/sqlcmd", "-S", "localhost", "-U", "sa", "-P", "ComplexP@ssw0rd!", "-Q", "SELECT 1"]
+      interval: 10s
+      retries: 5
+
+  redis:
+    image: redis:alpine  # Use the Redis image
+    container_name: redis
+    ports:
+      - "6379:6379"  # Expose Redis on port 6379
+    networks:
+      - app-network
+
+  nginx:
+    image: webshop-nginx:latest  # Use the pre-loaded image
+    ports:
+      - "80:80"  # Expose Nginx on port 80
+    depends_on:
+      - dotnet-api  # Ensure Nginx waits for dotnet-api to start
+    volumes:
+      - ./mala-sapa-webshop-frontend/dist:/usr/share/nginx/html  # Serve Angular app from Nginx's default directory
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
