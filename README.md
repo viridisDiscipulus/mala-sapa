@@ -35,7 +35,7 @@ Ti propusti omogućuju istraživanje ranjivosti, procjenu njihova utjecaja te do
 * Detaljne upute za pokretanje aplikacije i testiranje sigurnosti aplikacije uz primjenu OWASP metodologije možete pronaći u Word dokumentu: 
 [testiranja-sigurnosti-web-aplikacije.docx](https://github.com/user-attachments/files/18938342/testiranja-sigurnosti-web-aplikacije.docx)
 
-### Hash datoteka i rezultat skeniranja
+### Hash datoteke i rezultat skeniranja
 
     SHA-256:  051fcfeb76554aa4a5fc81b10cd66b764cbc64696063c62470806ad6dcde385d 
     VirusTotal: https://www.virustotal.com/gui/file/051fcfeb76554aa4a5fc81b10cd66b764cbc64696063c62470806ad6dcde385d/details
