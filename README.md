@@ -32,4 +32,5 @@ Ti propusti omogućuju istraživanje ranjivosti, procjenu njihova utjecaja te do
 ### Instalacija i pokretanje aplikacije
 
 * Aplikaciju je moguće preuzeti putem javnog Docker repozitorija na linku: https://hub.docker.com/search?q=viridisdiscipulus
-* Detaljne upute za pokretanje aplikacije i testiranje sigurnosti aplikacije uz primjenu OWASP metodologije možete pronaći u Word dokumentu: [test.docx](https://github.com/user-attachments/files/18765533/test.docx)
+* Detaljne upute za pokretanje aplikacije i testiranje sigurnosti aplikacije uz primjenu OWASP metodologije možete pronaći u Word dokumentu: 
+[testiranja-sigurnosti-web-aplikacije.docx](https://github.com/user-attachments/files/18938342/testiranja-sigurnosti-web-aplikacije.docx)
